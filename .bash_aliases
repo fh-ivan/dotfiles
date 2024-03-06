@@ -4,6 +4,9 @@ export LSCOLORS=GxFxCxDxBxegedabagaced
 export VISUAL=vim
 export EDITOR="$VISUAL"
 
+export LANG=en_US.UTF-8 
+export LANGUAGE=en.UTF-8
+
 source ~/.bash_prompt
 
 # Case-insensitive globbing (used in pathname expansion)
