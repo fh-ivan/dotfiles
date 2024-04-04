@@ -1,4 +1,7 @@
 # powershell -executionpolicy bypass -FILE ./workstation.ps1
+# gcloud config set workstations/cluster fh-dev-vpc1-ws-cluster
+# gcloud config set workstations/config fh-dev-ws-oss-2c8g200gb
+# gcloud config set workstations/region asia-south1
 
 Write-Host "Checking WS state..."
 $WS = "fh-workstation-oss-ikerin-2"
