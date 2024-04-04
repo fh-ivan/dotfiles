@@ -1,3 +1,5 @@
+# powershell -executionpolicy bypass -FILE ./workstation.ps1
+
 Write-Host "Checking WS state..."
 $WS = "fh-workstation-oss-ikerin-2"
 $WS_STATE = & { Invoke-Expression "gcloud workstations describe $WS --format 'get(state)'" }
