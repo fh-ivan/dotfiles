@@ -1,0 +1,16 @@
+[push]
+	default = simple
+[merge]
+	tool = vimdiff
+[mergetool]
+	keepBackup = false
+[log]
+	abbrevCommit = true
+[format]
+	pretty = format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
+[core]
+	excludesfile = ~/.gitignore_global
+[include]
+    path = ~/.gitconfig_user
+[pull]
+    rebase = false
