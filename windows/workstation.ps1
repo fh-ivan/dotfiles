@@ -1,10 +1,18 @@
-# powershell -executionpolicy bypass -FILE ./workstation.ps1
-# gcloud config set workstations/cluster fh-dev-vpc1-ws-cluster
-# gcloud config set workstations/config fh-dev-ws-oss-2c8g200gb
-# gcloud config set workstations/region asia-south1
+# Create a shortcut to this script, and set its properties to (to add the execution policy bypass):
+#
+#     powershell -executionpolicy bypass -FILE ./workstation.ps1
+#
+# Afterwards, execute those commands to set your environment, so the commands can point to your workstation
+#
+#     gcloud config set workstations/cluster fh-dev-vpc1-ws-cluster
+#     gcloud config set workstations/config fh-dev-ws-oss-2c8g200gb
+#     gcloud config set workstations/region asia-south1
+# 
+# And lastly modify the workstation name ($WS variable)
+
+$WS = "ivan-kerin"
 
 Write-Host "Checking WS state..."
-$WS = "fh-workstation-oss-ikerin-2"
 $WS_STATE = & { Invoke-Expression "gcloud workstations describe $WS --format 'get(state)'" }
 Write-Host "Workstation: $WS_STATE"
 If ($WS_STATE -eq 'STATE_STOPPED') {
@@ -20,6 +28,7 @@ else {
 $ports = @(
     [pscustomobject]@{Workstation = 22; Local = 1025 }
     [pscustomobject]@{Workstation = 8080; Local = 8080 }
+    [pscustomobject]@{Workstation = 3000; Local = 3000 }
     [pscustomobject]@{Workstation = 5432; Local = 5432 }
 )
 
