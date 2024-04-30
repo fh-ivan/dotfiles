@@ -11,12 +11,13 @@
 # And lastly modify the workstation name ($WS variable)
 
 $WS = "ivan-kerin"
+$PROJECT = "fluenthealth-dev"
 
 Write-Host "Checking WS state..."
-$WS_STATE = & { Invoke-Expression "gcloud workstations describe $WS --format 'get(state)'" }
+$WS_STATE = & { Invoke-Expression "gcloud workstations describe $WS --format 'get(state)' --project $PROJECT" }
 Write-Host "Workstation: $WS_STATE"
 If ($WS_STATE -eq 'STATE_STOPPED') {
-    Invoke-Expression "gcloud workstations start $WS"
+    Invoke-Expression "gcloud workstations start $WS --project $PROJECT"
 }
 elseif ($WS_STATE -eq 'STATE_RUNNING') {
     Write-Host "Workstation already running"
@@ -39,7 +40,7 @@ $jobs = $ports | Foreach-Object {
     Start-Job -ScriptBlock {
         Param([string]$commnad)
         Invoke-Expression $commnad
-    } -ArgumentList "gcloud workstations start-tcp-tunnel $WS $($_.Workstation) --local-host-port :$($_.Local)"
+    } -ArgumentList "gcloud workstations start-tcp-tunnel $WS $($_.Workstation) --local-host-port :$($_.Local) --project $PROJECT"
 }
 
 # Wait until all jobs have completed, passing their output through as it
